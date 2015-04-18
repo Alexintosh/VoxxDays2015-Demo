@@ -85,7 +85,7 @@ angular.module('starter.controllers', [])
 	var name = $stateParams.name;
 	var sp = Speakers.get(name);
 	c(sp);
-	sp.sessions = SessionsSv.getBySpeaker(sp.username);
+	sp.sessions = SessionsSv.getBySpeaker(sp.name);
 	$scope.d = sp;
 	c($scope.d);
 });

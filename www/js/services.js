@@ -43,16 +43,6 @@ angular.module('starter.services', [])
 		$ionicLoading.hide();
 	};
 
-	/*
-	var share = function(url){
-		var url = url || URL;
-		$cordovaSocialSharing.share('', '', null, url) // Share via native share sheet
-		.then(function(result) {
-			c(result);
-		});
-	};
-	*/
-
 	var stateOnlineChanged = function(){
 		var newval = isOnline();
 		$rootScope.online = newval;
@@ -64,54 +54,6 @@ angular.module('starter.services', [])
 		var v = JSON.parse(value);
 		return v;
 	};
-
-	/*
-	var sendMail = function(email){
-		var email = email || {
-			to: '',
-			cc: 'alessio.d@gmail.com',
-			bcc: [],
-			attachments: [
-				//'file://img/logo.png',
-				//'res://icon.png',
-				//'base64:icon.png//iVBORw0KGgoAAAANSUhEUg...',
-				//'file://README.pdf'
-			],
-			subject: 'Check out this great Ionic app',
-			body: 'How are you? Nice greetings from Leipzig',
-			isHtml: true
-		};
-
-		$cordovaEmailComposer.isAvailable().then(function() {
-			// is available
-			$cordovaEmailComposer.open(email).then(null, function () {
-			// user cancelled email
-			});
-
-		}, function () {
-			// not available
-			alert('Sorry, email not avaiable');
-		});
-
-	};
-
-	var rateApp = function(){
-		$cordovaAppRate.promptForRating(true).then(function (result) {
-			// success
-		});
-	};
-
-	var appBrowser = function(url){
-		var url = url || URL;
-		$cordovaInAppBrowser.open(url, '_self', {})
-		.then(function(event) {
-			// success
-		})
-		.catch(function(event) {
-			// error
-		});
-	};
-	*/
 
 	return {
 		showL: showL,
@@ -150,7 +92,7 @@ angular.module('starter.services', [])
 	var fetch = function(){
 		var f = $localstorage.getObject('speakers');
 		if(!f) {
-            //https://voxxeddaysticino2015.sched.org/api/role/export?api_key=4a983d5abeb7573100f9c188b3a82021&format=json&role=speaker
+			//https://voxxeddaysticino2015.sched.org/api/role/export?api_key=4a983d5abeb7573100f9c188b3a82021&format=json&role=speaker
 			return Api.get('/role/export', 'role=speaker').then(function(data){
 				$localstorage.setObject('speakers', data);
 				return data;
@@ -163,8 +105,8 @@ angular.module('starter.services', [])
 	var get = function(name){
 		var sp = fetch();
 		for(var i in sp){
-            if(sp[i].name.replace(/ /g,'') === name.replace(/ /g,'') )
-				return sp[i];
+			if(sp[i].name.replace(/ /g,'') === name.replace(/ /g,'') )
+					return sp[i];
 		}
 		return false;
 	}
@@ -197,7 +139,7 @@ angular.module('starter.services', [])
 		var ret = [];
 		for(var i in sessions){
 			if( sessions[i].speakers){
-				if(sessions[i].speakers[0].username == name )
+				if(sessions[i].speakers[0].name == name )
 					ret.push( sessions[i] );
 			}
 		}
